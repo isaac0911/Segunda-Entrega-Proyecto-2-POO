@@ -119,4 +119,122 @@ public class SitioTuristico{
 		
 	}
 	
+	public static ArrayList<ArrayList<String>> FiltrarSitiosPorDepa(String NombreDepa, ArrayList<ArrayList<String>> DatosSitiosTuristicos){
+		
+		ArrayList<String> NombresDepartamentos = new ArrayList<String>();
+		
+		for (int i=0; i<DatosSitiosTuristicos.size(); i++){
+			ArrayList<String> DatosSitio = DatosSitiosTuristicos.get(i);
+			NombresDepartamentos.add(DatosSitio.get(2));
+		}
+		
+		ArrayList<Integer> PosicionesDepartamentosQueCumplen = new ArrayList<Integer>();
+		
+		for (int i=0;i<NombresDepartamentos.size(); i++){
+			if (NombreDepa.equals(NombresDepartamentos.get(i))){
+				PosicionesDepartamentosQueCumplen.add(i);
+			}
+		}
+		
+		ArrayList<ArrayList<String>> DatosSitiosElegidos = new ArrayList<ArrayList<String>>();
+		
+		for (int i=0; i<PosicionesDepartamentosQueCumplen.size(); i++){
+			int posicion = PosicionesDepartamentosQueCumplen.get(i);
+			ArrayList<String> DatosSitio = DatosSitiosTuristicos.get(posicion);
+			DatosSitiosElegidos.add(DatosSitio);
+		}
+		
+		return DatosSitiosElegidos;
+		
+	}
+	
+	public static ArrayList<ArrayList<String>> FiltrarSitiosMasEconomicos(ArrayList<ArrayList<String>> SitiosAFiltrar, String TipoTurista){
+		
+		if(TipoTurista=="Nacional"){
+			
+			while(SitiosAFiltrar.size()>5){
+				
+				ArrayList<Float> PreiosNac = new ArrayList<Float>();
+		
+				for (int i=0; i<SitiosAFiltrar.size(); i++){
+					ArrayList<String> DatosSitio = SitiosAFiltrar.get(i);
+					PreiosNac.add(Float.parseFloat(DatosSitio.get(6)));
+				}
+				
+				int posPrecioMasAlto = 0;
+				float PrecioMasAlt = PreiosNac.get(0);
+			
+				for (int i=0; i<PreiosNac.size(); i++){
+					float Precio = PreiosNac.get(i);
+					if(Precio>PrecioMasAlt){
+						PrecioMasAlt = Precio;
+						posPrecioMasAlto = i;
+					}
+				}
+				
+				SitiosAFiltrar.remove(posPrecioMasAlto);
+				
+			}
+			
+		}else if (TipoTurista=="Extranjero"){
+			
+			while(SitiosAFiltrar.size()>5){
+				
+				ArrayList<Float> PreiosExt = new ArrayList<Float>();
+				
+				for (int i=0; i<SitiosAFiltrar.size(); i++){
+					ArrayList<String> DatosSitio = SitiosAFiltrar.get(i);
+					PreiosExt.add(Float.parseFloat(DatosSitio.get(7)));
+				}
+				
+				int posPrecioMasAlto = 0;
+				float PrecioMasAlt = PreiosExt.get(0);
+				
+				for (int i=0; i<PreiosExt.size(); i++){
+					float Precio = PreiosExt.get(i);
+					if(Precio>PrecioMasAlt){
+						PrecioMasAlt = Precio;
+						posPrecioMasAlto = i;
+					}
+				}
+				
+				SitiosAFiltrar.remove(posPrecioMasAlto);
+				
+			}
+			
+		}
+		
+		return SitiosAFiltrar;
+		
+	}
+	
+	public static ArrayList<ArrayList<String>> FiltrarSitiosDeLaCap (ArrayList<ArrayList<String>> DatosSitiosTuristicos){
+		
+		ArrayList<String> NombresMunicipios = new ArrayList<String>();
+		
+		for (int i=0; i<DatosSitiosTuristicos.size(); i++){
+			ArrayList<String> DatosSitio = DatosSitiosTuristicos.get(i);
+			NombresMunicipios.add(DatosSitio.get(3));
+		}
+		
+		ArrayList<Integer> PosicionesSitiosQueCumplen = new ArrayList<Integer>();
+		
+		for (int i=0;i<NombresMunicipios.size(); i++){
+			if ("Guatemala".equals(NombresMunicipios.get(i))){
+				PosicionesSitiosQueCumplen.add(i);
+			}
+		}
+		
+		ArrayList<ArrayList<String>> DatosSitiosElegidos = new ArrayList<ArrayList<String>>();
+		
+		for (int i=0; i<PosicionesSitiosQueCumplen.size(); i++){
+			int posicion = PosicionesSitiosQueCumplen.get(i);
+			ArrayList<String> DatosSitio = DatosSitiosTuristicos.get(posicion);
+			DatosSitiosElegidos.add(DatosSitio);
+		}
+		
+		return DatosSitiosElegidos;
+		
+	}
+	
 }
