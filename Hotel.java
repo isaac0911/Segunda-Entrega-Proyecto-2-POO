@@ -84,4 +84,92 @@ public class Hotel{
 		return DatosHotelesElegidos;
 		
 	}
+	
+	public static ArrayList<ArrayList<String>> FiltrarHotelesPorDepa(String NombreDepa, ArrayList<ArrayList<String>> DatosHoteles){
+		
+		ArrayList<String> NombresDepartamentos = new ArrayList<String>();
+		
+		for (int i=0; i<DatosHoteles.size(); i++){
+			ArrayList<String> DatosHotel = DatosHoteles.get(i);
+			NombresDepartamentos.add(DatosHotel.get(2));
+		}
+		
+		ArrayList<Integer> PosicionesHotelesQueCumplen = new ArrayList<Integer>();
+		
+		for (int i=0;i<NombresDepartamentos.size(); i++){
+			if (NombreDepa.equals(NombresDepartamentos.get(i))){
+				PosicionesHotelesQueCumplen.add(i);
+			}
+		}
+		
+		ArrayList<ArrayList<String>> DatosHotelesElegidos = new ArrayList<ArrayList<String>>();
+		
+		for (int i=0; i<PosicionesHotelesQueCumplen.size(); i++){
+			int posicion = PosicionesHotelesQueCumplen.get(i);
+			ArrayList<String> DatosHotel = DatosHoteles.get(posicion);
+			DatosHotelesElegidos.add(DatosHotel);
+		}
+		
+		return DatosHotelesElegidos;
+		
+	}
+	
+	public static ArrayList<ArrayList<String>> FiltrarHotelesMejorCalific(ArrayList<ArrayList<String>> HotelesAFiltrar){
+		
+		while(HotelesAFiltrar.size()>5){
+				
+				ArrayList<Float> Calificaciones = new ArrayList<Float>();
+		
+				for (int i=0; i<HotelesAFiltrar.size(); i++){
+					ArrayList<String> DatosHotel = HotelesAFiltrar.get(i);
+					Calificaciones.add(Float.parseFloat(DatosHotel.get(7)));
+				}
+				
+				int posCalificacionMasBaja = 0;
+				float CalificacionMasBaja = Calificaciones.get(0);
+			
+				for (int i=0; i<Calificaciones.size(); i++){
+					float Calificacion = Calificaciones.get(i);
+					if(Calificacion<CalificacionMasBaja){
+						CalificacionMasBaja = Calificacion;
+						posCalificacionMasBaja = i;
+					}
+				}
+				
+				HotelesAFiltrar.remove(posCalificacionMasBaja);
+				
+			}
+		
+		return HotelesAFiltrar;
+	}
+	
+	public static ArrayList<ArrayList<String>> FiltrarHotelesDeLaCapital(ArrayList<ArrayList<String>> DatosHoteles){
+		
+		ArrayList<String> NombresMunicipios = new ArrayList<String>();
+		
+		for (int i=0; i<DatosHoteles.size(); i++){
+			ArrayList<String> DatosHotel = DatosHoteles.get(i);
+			NombresMunicipios.add(DatosHotel.get(3));
+		}
+		
+		ArrayList<Integer> PosicionesHotelesQueCumplen = new ArrayList<Integer>();
+		
+		for (int i=0;i<NombresMunicipios.size(); i++){
+			if ("Guatemala".equals(NombresMunicipios.get(i))){
+				PosicionesHotelesQueCumplen.add(i);
+			}
+		}
+		
+		ArrayList<ArrayList<String>> DatosHotelesElegidos = new ArrayList<ArrayList<String>>();
+		
+		for (int i=0; i<PosicionesHotelesQueCumplen.size(); i++){
+			int posicion = PosicionesHotelesQueCumplen.get(i);
+			ArrayList<String> DatosHotel = DatosHoteles.get(posicion);
+			DatosHotelesElegidos.add(DatosHotel);
+		}
+		
+		return DatosHotelesElegidos;
+		
+	}
+	
 }
