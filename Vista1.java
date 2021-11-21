@@ -20,7 +20,7 @@ public class Vista1 {
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);;
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
@@ -29,7 +29,7 @@ public class Vista1 {
 		while (validacion = false || numero<1 || numero>8){
 			System.out.println("\nERROR!! Ingrese un numero entre 1 y 8\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);;
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -62,7 +62,9 @@ public class Vista1 {
 		
 		dato = scan.nextLine();
 		
-		validacion = comprobarDouble(dato);
+		double i = -1;
+		
+		validacion = comprobar(dato, i);
 		
 		if (validacion){
 			montoMax = Double.parseDouble(dato);
@@ -71,7 +73,7 @@ public class Vista1 {
 		while (validacion = false || montoMax<0.0){
 			System.out.println("\nERROR!! Ingrese un numero mayor o igual que 0\n");
 			dato = scan.nextLine();
-			validacion = comprobarDouble(dato);
+			validacion = comprobar(dato, i);
 			if (validacion){
 				montoMax = Double.parseDouble(dato);
 			}
@@ -103,7 +105,7 @@ public class Vista1 {
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
@@ -112,7 +114,7 @@ public class Vista1 {
 		while (validacion = false || numero<1 || numero>2){
 			System.out.println("\nERROR!! Ingrese un numero entre 1 y 2\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -132,7 +134,7 @@ public class Vista1 {
 		
 	}*/
 	
-	private static boolean comprobarDouble(String conjuntoCaracteres){
+	public static boolean comprobar(String conjuntoCaracteres, int num){
 		
 		try{
 			Double.parseDouble(conjuntoCaracteres);
@@ -143,7 +145,7 @@ public class Vista1 {
 		
 	}
 	
-	private static boolean comprobarNumero(String conjuntoCaracteres){
+	public static boolean comprobar(String conjuntoCaracteres, double num){
 		try{
 			Integer.parseInt(conjuntoCaracteres);
 			return true;

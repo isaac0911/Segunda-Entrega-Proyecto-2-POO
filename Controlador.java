@@ -96,11 +96,13 @@ public class Controlador{
 		
 		ArrayList<String> NombresDepartamentos = new ArrayList<>(Arrays.asList("Guatemala","Sacatepequez", "Escuintla", "Chimaltenango", "Solola", "Suchitepequez", "Retalhuheu", "San Marcos", "Quetzaltenango", "Totonicapan", "Quiche", "Huehuetenango", "Baja Verapaz", "Alta Verapaz", "Izabal", "Zacapa", "Chiquimula", "Jutiapa", "Jalapa", "Santa Rosa", "Peten", "El Progreso"));
 		
-		while (opcion != 7){
+		while (opcion != 9){
 			
 			opcion = Vista2.MostrarMenu();
 			
 			if (opcion==1){
+				
+				//SI DESEA BUSCAR SITIOS TURISTICOS EN FUNCION DE SUS NECESIDADES 
 				
 				//Pedir datos al usuario
 				ArrayList<String> MontRegTipoTurSitio = Vista2.PedirMontoYRegion();
@@ -139,6 +141,8 @@ public class Controlador{
 				
 			}else if (opcion == 2){
 				
+				//SI DESEA BUSCAR HOTELES EN FUNCION DE SUS NECESIDADES 
+				
 				//Pedir datos al usuario
 				ArrayList<String> MontoyRegionHotel = Vista1.PedirMontoYRegion();
 				String Nombreregion = MontoyRegionHotel.get(0);
@@ -172,6 +176,8 @@ public class Controlador{
 				
 			}else if (opcion == 3){
 				
+				//SI DESEA VER LOS SITIOS TURISITICOS MAS ECONOMICOS DE DETERMINADO DEPARTAMENTO
+				
 				//Pedir datos al usuario
 				String TipoDeTurista = Vista2.PedirTipoTurista();
 				String Departamento = Vista2.PedirDepartamento(NombresDepartamentos);
@@ -199,7 +205,42 @@ public class Controlador{
 					Vista2.MostrarMensaje(mensaje);
 				}
 				
+				
 			}else if (opcion == 4){
+				
+				//SI VER LOS SITIOS TURISTICOS DE DETERMINADO TIPO QUE HAY EN UN DEPARTAMENTO EN PARTICULAR
+				
+				//Pedir datos al usuario
+				String region = Vista2.PedirRegion();
+				String tipoSitios = Vista2.PedirTipoSitio();
+				
+				//Filtrar sitios turisticos en funcion de la region
+				ArrayList<ArrayList<String>> SitiosDeUnaRegion = SitioTuristico.FiltrarSitiosPorRegion(region, DatosSitiosTuristicos);
+				
+				//Filtrar los sitios turisticos por el tipo de sitios que el usuario desea
+				ArrayList<ArrayList<String>> DatosSitiosElegidos = SitioTuristico.FiltrarSitiosPorTipo(tipoSitios, SitiosDeUnaRegion);
+				
+				if(DatosSitiosElegidos.size()>0){
+					//Mandar a mostrar los nombres de los sitios que pasaron el filtro
+					ArrayList<String> NombresSitiosElegidos = MandarAMostrarSitiosDeUnTipo(DatosSitiosElegidos, tipoSitios, region);
+					
+					//Mandar a mostrar datos de un sitio particular
+					String SitioUHot = "sitios turisticos";
+					boolean DeseaVerInfo = Vista2.PreguntarVerInfo(SitioUHot);
+					
+					if (DeseaVerInfo){
+						MandarAMostrarInfoSitio(NombresSitiosElegidos, DatosSitiosElegidos);
+					}
+				}else{
+					//Mostrar Mensaje de fallo.
+					String mensaje = "\nNo se han encontrado sitios turisticos de tipo " + tipoSitios + " en la region " + region + ". Lamentamos el inconveniente, nuestra base de datos aun esta en crecimiento.";
+					Vista2.MostrarMensaje(mensaje);
+				}
+				
+				
+			}else if (opcion == 5){
+				
+				//SI VER LOS HOTELES MEJOR CALIFICADOS DE UN DEPARTAMENTO PARTICULAR
 				
 				//Pedir datos al usuario
 				String Departamento = Vista2.PedirDepartamento(NombresDepartamentos);
@@ -207,7 +248,7 @@ public class Controlador{
 				//Filtrar hoteles en funcion del departamento
 				ArrayList<ArrayList<String>> HotelesDeUnDepartamento = Hotel.FiltrarHotelesPorDepa(Departamento, DatosHoteles);
 				
-				//Filtrar sitios turisiticos en funcion de su precio
+				//Filtrar sitios turisiticos en funcion de su calificacion
 				ArrayList<ArrayList<String>> DatosHotelesElegidos = Hotel.FiltrarHotelesMejorCalific(HotelesDeUnDepartamento);
 				
 				if(DatosHotelesElegidos.size()>0){
@@ -227,7 +268,39 @@ public class Controlador{
 					Vista2.MostrarMensaje(mensaje);
 				}
 				
-			}else if (opcion == 5){
+			}else if (opcion == 6){
+				
+				//SI DESEA VER LOS HOTELES MAS BARATOS DE UN DEPARTAMENTO PARTICULAR
+				
+				//Pedir datos al usuario
+				String Departamento = Vista2.PedirDepartamento(NombresDepartamentos);
+				
+				//Filtrar hoteles en funcion del departamento
+				ArrayList<ArrayList<String>> HotelesDeUnDepartamento = Hotel.FiltrarHotelesPorDepa(Departamento, DatosHoteles);
+				
+				//Filtrar sitios turisiticos en funcion de su precio
+				ArrayList<ArrayList<String>> DatosHotelesElegidos = Hotel.FiltrarHotelesMasEconomicos(HotelesDeUnDepartamento);
+				
+				if(DatosHotelesElegidos.size()>0){
+					//Mandar a mostrar los nombres de los sitios que pasaron el filtro
+					ArrayList<String> NombresHotelesElegidos = MandarAMostrarHotelesEconomicos(DatosHotelesElegidos, Departamento);
+					
+					//Mandar a mostrar datos de un sitio particular
+					String SitioUHot = "hoteles";
+					boolean DeseaVerInfo = Vista2.PreguntarVerInfo(SitioUHot);
+					
+					if (DeseaVerInfo){
+						MandarAMostrarInfoHotel(NombresHotelesElegidos, DatosHotelesElegidos);
+					}
+				}else{
+					//Mostrar Mensaje de fallo.
+					String mensaje = "\nNo se han encontrado hoteles en el departamento de " + Departamento + ". Lamentamos el inconveniente, nuestra base de datos aun esta en crecimiento.";
+					Vista2.MostrarMensaje(mensaje);
+				}
+				
+			}else if (opcion == 7){
+				
+				//SI DESEA BUSCAR OPCIONES DE HOPEDAJE EN CIUDAD DE GUATEMALA
 				
 				//Pedir datos al usuario
 				float MontoMax = Vista2.PedirMontoEnCap();
@@ -255,7 +328,9 @@ public class Controlador{
 					Vista2.MostrarMensaje(mensaje);
 				}
 					
-			}else if (opcion == 6){
+			}else if (opcion == 8){
+				
+				//SI DESEA BUSCAR SITIOS TURISTICOS EN CIUDAD DE GUATEMALA
 				
 				//Pedir datos al usuario
 				String TipoDeTurista = Vista2.PedirTipoTurista();
@@ -294,7 +369,7 @@ public class Controlador{
 					
 				}
 				
-			}else if (opcion == 7){
+			}else if (opcion == 9){
 				Vista2.MensajeDespedida();
 				
 			}
@@ -467,6 +542,42 @@ public class Controlador{
 				
 		for (int i=0; i<DatosSitiosElegidos.size(); i++){
 			ArrayList<String> DatosHotel = DatosSitiosElegidos.get(i);
+			NombresHotelesElegidos.add(DatosHotel.get(0));
+		}
+				
+		Vista2.MostrarListaString(NombresHotelesElegidos);
+		
+		return NombresHotelesElegidos;
+		
+	}
+	
+	private static ArrayList<String> MandarAMostrarSitiosDeUnTipo(ArrayList<ArrayList<String>> DatosSitiosElegidos, String tipoSitios, String region){
+		
+		String mensaje = "\nLos sitios turisticos de tipo " + tipoSitios + " que se encuentran en la region " + region + ",son los siguientes:";
+		Vista2.MostrarMensaje(mensaje);
+				
+		ArrayList<String> NombresHotelesElegidos = new ArrayList<String>();
+				
+		for (int i=0; i<DatosSitiosElegidos.size(); i++){
+			ArrayList<String> DatosHotel = DatosSitiosElegidos.get(i);
+			NombresHotelesElegidos.add(DatosHotel.get(0));
+		}
+				
+		Vista2.MostrarListaString(NombresHotelesElegidos);
+		
+		return NombresHotelesElegidos;
+		
+	}
+	
+	private static ArrayList<String> MandarAMostrarHotelesEconomicos (ArrayList<ArrayList<String>> DatosHotelesElegidos, String Departamento){
+		
+		String mensaje = "\nLos hoteles mas economicos del departamento de " + Departamento + " son:";
+		Vista2.MostrarMensaje(mensaje);
+				
+		ArrayList<String> NombresHotelesElegidos = new ArrayList<String>();
+				
+		for (int i=0; i<DatosHotelesElegidos.size(); i++){
+			ArrayList<String> DatosHotel = DatosHotelesElegidos.get(i);
 			NombresHotelesElegidos.add(DatosHotel.get(0));
 		}
 				

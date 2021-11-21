@@ -28,20 +28,20 @@ public class Vista2 extends Vista1{
 		
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("\n-----------------------------------------------------------------------------------\nIngrese la opcion que desea ejecutar\n1.\tBuscar sitios turisticos en funcion de sus necesidades\n2.\tBuscar hoteles en funcion de sus necesidades\n3.\tVer los sitios turisticos mas economicos de un departamento particular\n4.\tVer los hoteles mejor calificados de un departamento en particular\n5.\tBuscar opciones de hospedaje en Ciudad de Guatemala\n6.\tBuscar sitios turisitos en Ciudad de Guatemala\n7.\tSalir\n");
+		System.out.println("\n-----------------------------------------------------------------------------------\nIngrese la opcion que desea ejecutar\n1.\tBuscar sitios turisticos en funcion de sus necesidades\n2.\tBuscar hoteles en funcion de sus necesidades\n3.\tVer los sitios turisticos mas economicos de un departamento particular\n4.\tVer los sitios turisticos de determinado tipo que hay en una region en particular\n5.\tVer los hoteles mejor calificados de un departamento en particular\n6.\tVer los hoteles mas economicos de un departamento en particular\n7.\tBuscar opciones de hospedaje en Ciudad de Guatemala\n8.\tBuscar sitios turisitos en Ciudad de Guatemala\n9.\tSalir\n");
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
 		}
 		
-		while (validacion = false || numero<1 || numero>7){
-			System.out.println("\nERROR!! Ingrese un numero entre 1 y 7\n");
+		while (validacion = false || numero<1 || numero>9){
+			System.out.println("\nERROR!! Ingrese un numero entre 1 y 9\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -66,7 +66,7 @@ public class Vista2 extends Vista1{
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
@@ -75,7 +75,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || numero<1 || numero>2){
 			System.out.println("\nERROR!! Ingrese un numero entre 1 y 2\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -98,7 +98,7 @@ public class Vista2 extends Vista1{
 		
 		dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
@@ -107,7 +107,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || numero<1 || numero>8){
 			System.out.println("\nERROR!! Ingrese un numero entre 1 y 8\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -140,7 +140,9 @@ public class Vista2 extends Vista1{
 		
 		dato = scan.nextLine();
 		
-		validacion = comprobarDouble(dato);
+		double i = -1;
+		
+		validacion = comprobar(dato, i);
 		
 		if (validacion){
 			montoMax = Double.parseDouble(dato);
@@ -149,7 +151,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || montoMax<0.0){
 			System.out.println("\nERROR!! Ingrese un numero mayor o igual que 0\n");
 			dato = scan.nextLine();
-			validacion = comprobarDouble(dato);
+			validacion = comprobar(dato, i);
 			if (validacion){
 				montoMax = Double.parseDouble(dato);
 			}
@@ -192,7 +194,7 @@ public class Vista2 extends Vista1{
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
@@ -201,7 +203,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || numero<1 || numero>2){
 			System.out.println("\nERROR!! Ingrese un numero entre 1 y 2\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -228,7 +230,7 @@ public class Vista2 extends Vista1{
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
@@ -237,7 +239,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || numero<1 || numero>DatosAMostrar.size()){
 			System.out.println("\nERROR!! Ingrese un numero entre 1 y "+ DatosAMostrar.size() +"\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -246,27 +248,6 @@ public class Vista2 extends Vista1{
 		String nombreElegido = DatosAMostrar.get(numero-1);
 		
 		return nombreElegido;
-	}
-	
-	private static boolean comprobarDouble(String conjuntoCaracteres){
-		
-		try{
-			Double.parseDouble(conjuntoCaracteres);
-			return true;
-		}catch (NumberFormatException nfe){
-			return false;
-		}
-		
-	}
-	
-	private static boolean comprobarNumero(String conjuntoCaracteres){
-		try{
-			Integer.parseInt(conjuntoCaracteres);
-			return true;
-		}
-		catch (NumberFormatException nfe){
-			return false;
-		}
 	}
 	
 	public static String PedirDepartamento(ArrayList<String> NombresDepartamentos){
@@ -286,7 +267,7 @@ public class Vista2 extends Vista1{
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
@@ -295,7 +276,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || numero<1 || numero>NombresDepartamentos.size()){
 			System.out.println("\nERROR!! Ingrese un numero entre 1 y " + NombresDepartamentos.size() + "\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -303,7 +284,7 @@ public class Vista2 extends Vista1{
 		
 		String departamento = NombresDepartamentos.get(numero-1);
 		
-		return (departamento);
+		return departamento;
 		
 	}
 	
@@ -320,7 +301,7 @@ public class Vista2 extends Vista1{
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarNumero(dato);
+		validacion = comprobar(dato, numero);
 		
 		if (validacion){
 			numero = Integer.parseInt(dato);
@@ -329,7 +310,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || numero<1 || numero>2){
 			System.out.println("\nERROR!! Ingrese un numero entre 1 y 2\n");
 			dato = scan.nextLine();
-			validacion = comprobarNumero(dato);
+			validacion = comprobar(dato, numero);
 			if (validacion){
 				numero = Integer.parseInt(dato);
 			}
@@ -355,7 +336,9 @@ public class Vista2 extends Vista1{
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarDouble(dato);
+		double i = -1;
+		
+		validacion = comprobar(dato, i);
 		
 		if (validacion){
 			montoMax = Double.parseDouble(dato);
@@ -364,7 +347,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || montoMax<0.0){
 			System.out.println("\nERROR!! Ingrese un numero mayor o igual que 0\n");
 			dato = scan.nextLine();
-			validacion = comprobarDouble(dato);
+			validacion = comprobar(dato, i);
 			if (validacion){
 				montoMax = Double.parseDouble(dato);
 			}
@@ -388,7 +371,9 @@ public class Vista2 extends Vista1{
 		
 		String dato = scan.nextLine();
 		
-		validacion = comprobarDouble(dato);
+		double i = -1;
+		
+		validacion = comprobar(dato, i);
 		
 		if (validacion){
 			montoMax = Double.parseDouble(dato);
@@ -397,7 +382,7 @@ public class Vista2 extends Vista1{
 		while (validacion = false || montoMax<0.0){
 			System.out.println("\nERROR!! Ingrese un numero mayor o igual que 0\n");
 			dato = scan.nextLine();
-			validacion = comprobarDouble(dato);
+			validacion = comprobar(dato, i);
 			if (validacion){
 				montoMax = Double.parseDouble(dato);
 			}
@@ -408,6 +393,102 @@ public class Vista2 extends Vista1{
 		float numero = Float.parseFloat(cadena);
 		
 		return numero;
+		
+	}
+	
+	public static String PedirTipoSitio(){
+		
+		String tipoSitio = "";
+		
+		int numero = 0;
+		boolean validacion = false;
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("\nIngrese el tipo de sitios turiticos que desea buscar:\n1.\tArqueologico\n2.\tReligioso\n3.\tNatural\n4.\tHistorico\n5.\tRecreativo\n6.\tCultural");
+		
+		String dato = scan.nextLine();
+		
+		validacion = comprobar(dato, numero);
+		
+		if (validacion){
+			numero = Integer.parseInt(dato);
+		}
+		
+		while (validacion = false || numero<1 || numero>6){
+			System.out.println("\nERROR!! Ingrese un numero entre 1 y 6\n");
+			dato = scan.nextLine();
+			validacion = comprobar(dato, numero);
+			if (validacion){
+				numero = Integer.parseInt(dato);
+			}
+		}
+		
+		if (numero==1){
+			tipoSitio = "Arqueologico";
+		}else if (numero==2){
+			tipoSitio = "Religioso";
+		}else if (numero==3){
+			tipoSitio = "Natural";
+		}else if (numero==4){
+			tipoSitio = "Historico";
+		}else if (numero==5){
+			tipoSitio = "Recreativo";
+		}else if (numero==6){
+			tipoSitio = "Cultural";
+		}
+		
+		return tipoSitio;
+		
+	}
+	
+	public static String PedirRegion(){
+		
+		String region = "";
+		
+		int numero = 0;
+		boolean validacion = false;
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("\nIngrese la region del pais por la que viajara\n1.\tMetropolitana\n2.\tCentral\n3\tSuroccidente\n4.\tNoroccidente\n5.\tSuroriente\n6.\tNororiente\n7.\tNorte\n8.\tPeten\n");
+		
+		String dato = scan.nextLine();
+		
+		validacion = comprobar(dato, numero);
+		
+		if (validacion){
+			numero = Integer.parseInt(dato);
+		}
+		
+		while (validacion = false || numero<1 || numero>8){
+			System.out.println("\nERROR!! Ingrese un numero entre 1 y 8\n");
+			dato = scan.nextLine();
+			validacion = comprobar(dato, numero);
+			if (validacion){
+				numero = Integer.parseInt(dato);
+			}
+		}
+		
+		if (numero==1){
+			region = "Metropolitana";
+		}else if (numero==2){
+			region = "Central";
+		}else if (numero==3){
+			region = "Suroccidente";
+		}else if (numero==4){
+			region = "Noroccidente";
+		}else if (numero==5){
+			region = "Suroriente";
+		}else if (numero==6){
+			region = "Nororiente";
+		}else if (numero==7){
+			region = "Norte";
+		}else if (numero==8){
+			region = "Peten";
+		}
+		
+		return region;
 		
 	}
 	
