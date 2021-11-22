@@ -237,4 +237,33 @@ public class SitioTuristico{
 		
 	}
 	
+	public static ArrayList<ArrayList<String>> FiltrarSitiosPorTipo(String TipoDeSitios, ArrayList<ArrayList<String>> DatosSitiosTuristicos){
+		
+		ArrayList<String> Tipos = new ArrayList<String>();
+		
+		for (int i=0; i<DatosSitiosTuristicos.size(); i++){
+			ArrayList<String> DatosSitio = DatosSitiosTuristicos.get(i);
+			Tipos.add(DatosSitio.get(4));
+		}
+		
+		ArrayList<Integer> PosicionesSitiosQueCumplen = new ArrayList<Integer>();
+		
+		for (int i=0;i<Tipos.size(); i++){
+			if (TipoDeSitios.equals(Tipos.get(i))){
+				PosicionesSitiosQueCumplen.add(i);
+			}
+		}
+		
+		ArrayList<ArrayList<String>> DatosSitiosElegidos = new ArrayList<ArrayList<String>>();
+		
+		for (int i=0; i<PosicionesSitiosQueCumplen.size(); i++){
+			int posicion = PosicionesSitiosQueCumplen.get(i);
+			ArrayList<String> DatosSitio = DatosSitiosTuristicos.get(posicion);
+			DatosSitiosElegidos.add(DatosSitio);
+		}
+		
+		return DatosSitiosElegidos;
+		
+	}
+	
 }

@@ -172,4 +172,34 @@ public class Hotel{
 		
 	}
 	
+	public static ArrayList<ArrayList<String>> FiltrarHotelesMasEconomicos(ArrayList<ArrayList<String>> HotelesAFiltrar){
+		
+		while(HotelesAFiltrar.size()>5){
+				
+			ArrayList<Float> PreciosNoche = new ArrayList<Float>();
+				
+			for (int i=0; i<HotelesAFiltrar.size(); i++){
+				ArrayList<String> DatosHotel = HotelesAFiltrar.get(i);
+				PreciosNoche.add(Float.parseFloat(DatosHotel.get(6)));
+			}
+				
+			int posPrecioMasAlto = 0;
+			float PrecioMasAlt = PreciosNoche.get(0);
+				
+			for (int i=0; i<PreciosNoche.size(); i++){
+				float PrecioNoche = PreciosNoche.get(i);
+				if(PrecioNoche>PrecioMasAlt){
+					PrecioMasAlt = PrecioNoche;
+					posPrecioMasAlto = i;
+				}
+			}
+				
+			HotelesAFiltrar.remove(posPrecioMasAlto);
+				
+		}
+		
+		return HotelesAFiltrar;
+		
+	}
+	
 }
